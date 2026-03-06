@@ -4,10 +4,12 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { getMe, updateMe } from '@/lib/api/clientApi';
+import { useAuthStore } from '@/lib/store/authStore';
 import css from './EditProfilePage.module.css';
 
 export default function EditProfilePage() {
   const router = useRouter();
+  const { setUser } = useAuthStore();
 
   const { data: user } = useQuery({
     queryKey: ['me'],
@@ -16,7 +18,8 @@ export default function EditProfilePage() {
 
   const updateMutation = useMutation({
     mutationFn: (username: string) => updateMe({ username }),
-    onSuccess: () => {
+    onSuccess: (updatedUser) => {
+      setUser(updatedUser);
       router.push('/profile');
     },
   });

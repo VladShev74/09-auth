@@ -1,7 +1,6 @@
 'use client';
 
 import css from './NoteForm.module.css';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createNote } from '@/lib/api/clientApi';
@@ -10,18 +9,10 @@ import type { Note } from '../../types/note';
 
 type NoteFormData = Omit<Note, 'id' | 'createdAt' | 'updatedAt'>;
 
-// const initialDraft: NoteFormData = {
-//   title: '',
-//   content: '',
-//   tag: 'Todo',
-// };
-
 export default function NoteForm() {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { draft, setDraft, clearDraft } = useDraftStore();
-
-  const [formData, setFormData] = useState(draft);
 
   const createMutation = useMutation({
     mutationFn: (values: NoteFormData) => createNote(values),
@@ -34,13 +25,12 @@ export default function NoteForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
     setDraft({ [name]: value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    createMutation.mutate(formData);
+    createMutation.mutate(draft);
   };
 
   return (
@@ -51,7 +41,7 @@ export default function NoteForm() {
           id="title"
           type="text"
           name="title"
-          value={formData.title}
+          value={draft.title}
           onChange={handleChange}
           className={css.input}
           disabled={createMutation.isPending}
@@ -63,7 +53,7 @@ export default function NoteForm() {
         <textarea
           id="content"
           name="content"
-          value={formData.content}
+          value={draft.content}
           onChange={handleChange}
           rows={8}
           className={css.textarea}
@@ -76,7 +66,7 @@ export default function NoteForm() {
         <select
           id="tag"
           name="tag"
-          value={formData.tag}
+          value={draft.tag}
           onChange={handleChange}
           className={css.select}
           disabled={createMutation.isPending}
@@ -101,7 +91,7 @@ export default function NoteForm() {
         <button
           type="submit"
           className={css.submitButton}
-          disabled={createMutation.isPending || !formData.title.trim()}
+          disabled={createMutation.isPending || !draft.title.trim()}
         >
           {createMutation.isPending ? 'Creating...' : 'Create note'}
         </button>
