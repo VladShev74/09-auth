@@ -10,7 +10,7 @@ import Link from 'next/link';
 import Loader from '@/components/Loader/Loader'
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage'
 import EmptyState from '@/components/EmptyState/EmptyState'
-import { fetchNotes } from "@/lib/clientApi";
+import { fetchNotes } from "@/lib/api/clientApi";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 // import NoteForm from "@/components/NoteForm/NoteForm";
 import { useDebouncedCallback } from 'use-debounce';

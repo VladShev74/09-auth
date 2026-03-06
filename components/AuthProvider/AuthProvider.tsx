@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/authStore';
-import { checkSession, logout, getMe } from '@/lib/clientApi';
+import { checkSession, logout, getMe } from '@/lib/api/clientApi';
 import Loader from '@/components/Loader/Loader';
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {

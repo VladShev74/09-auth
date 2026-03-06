@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { getMe, updateMe } from '@/lib/clientApi';
+import { getMe, updateMe } from '@/lib/api/clientApi';
 import css from './EditProfilePage.module.css';
 
 export default function EditProfilePage() {
