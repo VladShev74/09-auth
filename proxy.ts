@@ -5,7 +5,7 @@ import { checkSession } from './lib/api/serverApi';
 const privateRoutes = ['/notes', '/profile'];
 const authRoutes = ['/sign-in', '/sign-up'];
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const cookieStore = await cookies();
   const token = cookieStore.get('accessToken')?.value;
   const refreshToken = cookieStore.get('refreshToken')?.value;
