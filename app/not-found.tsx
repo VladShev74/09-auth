@@ -1,5 +1,5 @@
 // import React from 'react'
-import css from './Home.module.css';
+import css from './page.module.css';
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -4,6 +4,7 @@ import "./globals.css";
 import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import AuthProvider from '@/components/AuthProvider/AuthProvider';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,14 +58,16 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <TanStackProvider>
-          <div className="layout-wrapper">
-            <Header />
-            <main className="main-content">
-              {children}
-            </main>
-            <Footer />
-          </div>
-          {modal}
+          <AuthProvider>
+            <div className="layout-wrapper">
+              <Header />
+              <main className="main-content">
+                {children}
+              </main>
+              <Footer />
+            </div>
+            {modal}
+          </AuthProvider>
         </TanStackProvider>
         <div id="modal-root"></div>
       </body>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import css from '@/app/notes/Notes.module.css'
+import css from '@/app/(private routes)/notes/Notes.module.css'
 import SearchBox from '@/components/SearchBox/SearchBox'
 import Pagination from '@/components/Pagination/Pagination'
 import NoteList from "@/components/NoteList/NoteList";
@@ -10,7 +10,7 @@ import Link from 'next/link';
 import Loader from '@/components/Loader/Loader'
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage'
 import EmptyState from '@/components/EmptyState/EmptyState'
-import { fetchNotes } from "@/lib/api";
+import { fetchNotes } from "@/lib/clientApi";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 // import NoteForm from "@/components/NoteForm/NoteForm";
 import { useDebouncedCallback } from 'use-debounce';
